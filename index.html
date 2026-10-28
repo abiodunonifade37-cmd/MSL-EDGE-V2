@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090d14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="MSL Edge Flow — liquidity education, chart practice, playbooks and a private trading journal.">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>MSL Edge Flow V2.0 — Liquidity Trading Workspace</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">MSL</div><div><strong>EDGE FLOW</strong><small>LIQUIDITY WORKSPACE · V11</small></div></div>
+  <div class="nav-label">WORKSPACE</div>
+  <nav class="nav" id="sideNav">
+    <button class="active" data-page="home"><span class="ico">◈</span>Command center</button>
+    <button data-page="academy"><span class="ico">⌘</span>Liquidity Academy</button>
+    <button data-page="lab"><span class="ico">⌁</span>Chart Lab</button>
+    <button data-page="playbooks"><span class="ico">◇</span>Strategy playbooks</button>
+    <button data-page="journal"><span class="ico">▤</span>Trade journal</button>
+    <button data-page="analytics"><span class="ico">▥</span>Performance analytics</button>
+    <button data-page="review"><span class="ico">◎</span>Review & discipline</button>
+    <button data-page="settings"><span class="ico">⚙</span>Data & settings</button>
+  </nav>
+  <div class="sidefoot"><div><span class="status-dot"></span><b>Private workspace</b></div><small>Saved on this device. Export backups regularly.</small></div>
+</aside>
+<main class="main">
+  <header class="topbar"><div><div class="eyebrow" id="pageEyebrow">MSL EDGE FLOW / COMMAND CENTER</div><h1 class="h1" id="pageTitle">Trade with a process.</h1><div class="muted" id="pageSubtitle">Learn the model. Test the idea. Record the evidence.</div></div><div class="top-actions"><button class="btn" id="quickExport">Export backup</button><button class="btn primary" id="quickAdd">＋ Log a trade</button></div></header>
+  <section id="page-home" class="page">
+    <div class="hero"><span class="pill green">YOUR LIQUIDITY WORKSPACE</span><h2>From liquidity concepts to a repeatable trading process.</h2><p>Study sweeps, practise chart reading, document your setups and measure whether your rules are producing an edge. No profit promises. Just evidence, consistency and better decisions.</p><div class="hero-actions"><button class="btn primary" data-goto="academy">Start a lesson ↗</button><button class="btn" data-goto="lab">Open chart lab</button><button class="btn" data-goto="playbooks">Review my model</button></div></div>
+    <div class="section-head"><h2>Performance snapshot</h2><span class="pill">Calculated from your journal</span></div>
+    <div class="grid g4" id="homeStats"></div>
+    <div class="section-head"><h2>Recommended workflow</h2><span class="muted">Learn → Practise → Execute → Review</span></div>
+    <div class="grid g3">
+      <article class="card"><span class="eyebrow">01 / LEARN</span><h3>Liquidity Academy</h3><p class="muted">Structured lessons, chart examples and quizzes on sweeps, MSS, displacement, OB/FVG, premium-discount and SMT.</p><button class="btn small" data-goto="academy">Continue learning</button></article>
+      <article class="card"><span class="eyebrow">02 / PRACTISE</span><h3>Chart Lab</h3><p class="muted">Explore a generated practice chart, mark levels, plan a hypothetical trade and step through the scenario.</p><button class="btn small" data-goto="lab">Open lab</button></article>
+      <article class="card"><span class="eyebrow">03 / MEASURE</span><h3>Performance Analytics</h3><p class="muted">Track R-multiples, win rate, expectancy, setup quality and rule adherence from trades you record.</p><button class="btn small" data-goto="analytics">View analytics</button></article>
+    </div>
+    <div class="section-head"><h2>Latest journal activity</h2><button class="btn small" data-goto="journal">Open journal</button></div><div class="card" id="recentTrades"></div>
+    <div class="section-head"><h2>Today's principle</h2></div><div class="card"><span class="eyebrow">PROCESS OVER PREDICTION</span><h3 id="dailyPrinciple">A sweep is information, not an entry signal.</h3><p class="muted" id="dailyPrincipleText">Wait for the conditions in your plan. If confirmation never appears, no trade is a valid outcome.</p></div>
+  </section>
+
+  <section id="page-academy" class="page hidden">
+    <div class="hero"><span class="pill green">EDUCATION / PRACTICE</span><h2>Liquidity Academy</h2><p>Learn each concept as part of a decision process. Lessons are original educational material—not a claim that any trading method guarantees results.</p></div>
+    <div class="tabs" id="academyTabs"></div>
+    <div class="lesson-layout"><div class="card" id="lessonContent"></div><div class="card"><h3>Lesson map</h3><p class="muted">Choose a lesson. Complete the knowledge check to record your progress locally.</p><div class="lesson-list" id="lessonList"></div><div class="section-head"><h3>Knowledge check</h3></div><div id="quizBox"></div></div></div>
+    <div class="section-head"><h2>Important distinction</h2></div><div class="note">A liquidity sweep alone does not establish direction. Context, confirmation, invalidation and risk are separate decisions. Examples are educational; validate rules with historical testing before risking capital.</div>
+  </section>
+
+  <section id="page-lab" class="page hidden">
+    <div class="hero"><span class="pill green">SIMULATION / NO LIVE DATA</span><h2>Chart Lab</h2><p>Mark a practice chart, define your hypothetical entry and step through a simulated sequence. The sample candles are generated for learning and are not live market prices.</p></div>
+    <div class="grid g2" style="margin-top:14px"><div class="card"><div class="section-head" style="margin-top:0"><h2>Practice chart</h2><span class="pill" id="candleCounter">Scenario 1</span></div><div class="chartbox"><div class="charttools" id="chartTools"><button class="btn small active" data-tool="inspect">Inspect</button><button class="btn small" data-tool="level">Mark level</button><button class="btn small" data-tool="entry">Entry</button><button class="btn small" data-tool="stop">Stop</button><button class="btn small" data-tool="target">Target</button><button class="btn small" id="resetChart">Reset</button><button class="btn small primary" id="nextCandle">Next candle →</button></div><canvas id="chartCanvas" width="900" height="480" aria-label="Simulated candlestick chart"></canvas><div class="chart-note" id="chartNote">Practice scenario: look for a possible sweep near a prior swing. This is synthetic data.</div></div><p class="footer-note">Tap/click the chart to place the selected annotation. This tool does not connect to a broker or place orders.</p></div>
+    <div class="card"><h2>Trade planner</h2><p class="muted">Record the hypothesis before revealing the next candle.</p><div class="field"><label>Market / scenario label</label><input id="labMarket" value="SIMULATED · London reversal"></div><div class="field"><label>Directional hypothesis</label><select id="labDirection"><option>Bullish</option><option>Bearish</option><option>Wait / no trade</option></select></div><div class="field"><label>Liquidity level</label><select id="labLiquidity"><option>PDH / PDL</option><option>BSL / SSL</option><option>Equal highs / lows</option><option>Session high / low</option><option>Internal range liquidity</option><option>External range liquidity</option></select></div><div class="field"><label>Confirmation to wait for</label><select id="labConfirmation"><option>Displacement + MSS</option><option>MSS only (per my rules)</option><option>SMT + structure confirmation</option><option>No confirmation yet</option></select></div><div class="form-grid"><div class="field"><label>Entry price (simulated)</label><input type="number" step="any" id="labEntry" placeholder="e.g. 102.5"></div><div class="field"><label>Stop price</label><input type="number" step="any" id="labStop" placeholder="e.g. 100.0"></div><div class="field"><label>Target price</label><input type="number" step="any" id="labTarget" placeholder="e.g. 108.0"></div><div class="field"><label>Risk amount (optional)</label><input type="number" step="any" id="labRisk" placeholder="Account currency"></div></div><div id="labRR" class="feedback">Enter entry, stop and target to calculate hypothetical R:R.</div><div class="field" style="margin-top:12px"><label>Reasoning / invalidation</label><textarea id="labReason" placeholder="What must price do? What invalidates the idea?"></textarea></div><button class="btn primary" id="saveLab">Save practice plan</button><div class="section-head"><h3>Saved practice plans</h3></div><div id="labPlans"></div></div></div>
+  </section>
+
+  <section id="page-playbooks" class="page hidden">
+    <div class="hero"><span class="pill green">YOUR RULES / EDITABLE</span><h2>Strategy playbooks</h2><p>Separate reversal and continuation logic. Customize the checklist to reflect your actual rules; a checklist is not a prediction engine.</p></div>
+    <div class="tabs" id="playbookTabs"><button class="active" data-model="reversal">Liquidity reversal</button><button data-model="continuation">Liquidity continuation</button></div>
+    <div class="grid g2"><div class="card"><h2 id="playbookTitle">Liquidity reversal</h2><p class="muted" id="playbookDescription">Sweep → displacement → MSS → retracement → target.</p><div id="playbookChecklist" class="checklist"></div><div class="field"><label>My personal rule / notes</label><textarea id="playbookNotes" placeholder="Define exact conditions, invalidation and exceptions..."></textarea></div><button class="btn primary" id="savePlaybook">Save playbook</button></div><div class="card"><h2>Decision gate</h2><p class="muted">Use this before considering an entry.</p><div id="gateResult" class="feedback">Complete the checklist to see which conditions remain unverified.</div><div class="section-head"><h3>Do not confuse</h3></div><div class="note">A valid-looking chart pattern is not enough. A trade should have a defined invalidation point, position size, target logic and acceptable risk before entry.</div><div class="section-head"><h3>Rule adherence</h3></div><p class="muted">Record whether each live trade followed the model. Analytics will compare rule-following and non-rule-following outcomes when enough data exists.</p></div></div>
+  </section>
+
+  <section id="page-journal" class="page hidden">
+    <div class="section-head" style="margin-top:0"><h2>Trade journal</h2><span class="pill">Stored locally</span></div>
+    <div class="grid g2"><div class="card"><h2 id="tradeFormTitle">Log a trade</h2><form id="tradeForm"><input type="hidden" id="tradeId"><div class="form-grid">
+      <div class="field"><label>Date</label><input id="tDate" type="date" required></div><div class="field"><label>Market / pair</label><input id="tPair" placeholder="EURUSD, XAUUSD, BTCUSDT" required></div>
+      <div class="field"><label>Direction</label><select id="tDirection"><option>Long</option><option>Short</option></select></div><div class="field"><label>Setup type</label><select id="tSetup"><option>Liquidity reversal</option><option>Liquidity continuation</option><option>Other / experimental</option></select></div>
+      <div class="field"><label>Session</label><select id="tSession"><option>London</option><option>New York</option><option>Asia</option><option>Other</option></select></div><div class="field"><label>Outcome</label><select id="tOutcome"><option value="win">Win</option><option value="loss">Loss</option><option value="breakeven">Breakeven</option><option value="open">Open / not closed</option></select></div>
+      <div class="field"><label>Result (R multiple)</label><input id="tR" type="number" step="0.01" placeholder="e.g. 2 or -1"></div><div class="field"><label>Risk (% of account)</label><input id="tRisk" type="number" step="0.01" min="0" placeholder="e.g. 0.5"></div>
+      <div class="field"><label>Liquidity swept</label><select id="tLiquidity"><option>PDH</option><option>PDL</option><option>BSL</option><option>SSL</option><option>Equal highs</option><option>Equal lows</option><option>Session high / low</option><option>Trend liquidity</option><option>None / unclear</option></select></div><div class="field"><label>Entry model</label><select id="tEntryModel"><option>Order Block</option><option>FVG</option><option>Breaker</option><option>Mitigation block</option><option>Other</option></select></div>
+      <div class="field"><label>Confirmation</label><select id="tConfirm"><option>Displacement + MSS</option><option>MSS</option><option>CHoCH</option><option>SMT + structure</option><option>None</option></select></div><div class="field"><label>Rule adherence</label><select id="tRules"><option value="yes">Followed my rules</option><option value="no">Broke / skipped a rule</option><option value="partial">Partially followed</option></select></div>
+      <div class="field full"><label>Trade reasoning, execution and lesson</label><textarea id="tNotes" placeholder="Context → liquidity → confirmation → entry → invalidation → result → lesson"></textarea></div>
+      <div class="field full"><label>Chart screenshot (optional)</label><input id="tImage" type="file" accept="image/*"><small>Images are resized before saving to reduce storage usage. Avoid storing sensitive information.</small><div id="imagePreview"></div></div>
+    </div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" type="submit">Save trade</button><button class="btn" type="button" id="cancelEdit">Clear form</button></div></form></div>
+    <div class="card"><h2>Trade records</h2><div class="field"><label>Search records</label><input class="search" id="tradeSearch" placeholder="Search market, setup, notes..."></div><div class="field"><label>Filter setup</label><select id="tradeFilter"><option value="all">All setups</option><option>Liquidity reversal</option><option>Liquidity continuation</option><option>Other / experimental</option></select></div><div id="tradeTable"></div></div></div>
+  </section>
+
+  <section id="page-analytics" class="page hidden">
+    <div class="hero"><span class="pill green">EVIDENCE, NOT GUESSES</span><h2>Performance analytics</h2><p>Results are calculated from your closed journal trades with numeric R results. Open trades are excluded from win-rate and expectancy calculations.</p></div>
+    <div class="grid g4" id="analyticsStats" style="margin-top:14px"></div>
+    <div class="grid g2" style="margin-top:14px"><div class="card"><h2>Results by setup</h2><div id="setupStats"></div></div><div class="card"><h2>Rule adherence</h2><div id="ruleStats"></div></div><div class="card"><h2>Session breakdown</h2><div id="sessionStats"></div></div><div class="card"><h2>Trade distribution</h2><div id="distribution"></div></div></div>
+    <p class="footer-note">Statistics are descriptive, not predictive. Small samples, changing conditions, costs, execution quality and selection bias can materially affect results. Enter net R after costs where possible.</p>
+  </section>
+
+  <section id="page-review" class="page hidden">
+    <div class="hero"><span class="pill green">WEEKLY REVIEW</span><h2>Review your process, not just your P&amp;L.</h2><p>Use a repeatable review to spot recurring execution errors. Honest notes are more useful than a perfect-looking journal.</p></div>
+    <div class="grid g2" style="margin-top:14px"><div class="card"><h2>Review worksheet</h2><div class="field"><label>Review period</label><select id="reviewPeriod"><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="all">All recorded trades</option></select></div><div id="reviewSnapshot" class="feedback"></div><div class="field"><label>Best decision I made</label><textarea id="reviewBest" placeholder="What process did I follow well?"></textarea></div><div class="field"><label>Most expensive mistake</label><textarea id="reviewMistake" placeholder="What did I do, and what evidence shows it was a mistake?"></textarea></div><div class="field"><label>One rule for next period</label><textarea id="reviewRule" placeholder="Make it specific and observable."></textarea></div><button class="btn primary" id="saveReview">Save review</button></div><div class="card"><h2>Saved reviews</h2><div id="reviewList"></div><div class="section-head"><h3>Discipline prompts</h3></div><div class="checklist"><label class="checkrow"><input type="checkbox"><span><strong>Did I wait for my defined confirmation?</strong><small>No hindsight edits to the plan.</small></span></label><label class="checkrow"><input type="checkbox"><span><strong>Was risk defined before entry?</strong><small>Risk is a planned variable, not an afterthought.</small></span></label><label class="checkrow"><input type="checkbox"><span><strong>Did I accept no-trade conditions?</strong><small>Missing a move is not a reason to chase it.</small></span></label><label class="checkrow"><input type="checkbox"><span><strong>Did I record the actual outcome honestly?</strong><small>Record losses and rule violations as carefully as wins.</small></span></label></div></div></div>
+  </section>
+
+  <section id="page-settings" class="page hidden">
+    <div class="hero"><span class="pill green">DATA CONTROL</span><h2>Your records belong to you.</h2><p>This build is local-first. It does not require an account, remote database, broker connection or API key. Data can be lost if browser storage is cleared, so keep backups.</p></div>
+    <div class="grid g2" style="margin-top:14px"><div class="card"><h2>Backup & restore</h2><p class="muted">Export all trades, plans, playbooks, lessons progress and reviews to a JSON backup. Restore only a backup you trust.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="exportData">Export JSON backup</button><button class="btn" id="exportCsv">Export trades CSV</button><button class="btn" id="importButton">Import backup</button><input type="file" accept="application/json,.json" id="importFile" class="hidden-input"></div><div class="section-head"><h3>Storage status</h3></div><div id="storageStatus" class="feedback"></div></div><div class="card"><h2>Notifications & install</h2><p class="muted">Notifications and background alarms are not guaranteed on all mobile browsers. Android power-saving policies may delay or block them.</p><button class="btn" id="enableNotifications">Request notification permission</button><div id="notificationStatus" class="feedback" style="margin-top:10px"></div><div class="section-head"><h3>Install as a PWA</h3></div><p class="muted">Host the files on HTTPS (for example, GitHub Pages), then use your browser menu's “Install app” or “Add to Home screen”. Offline caching works after the service worker has been installed.</p><div class="note">No online market feed or broker execution is included. The Chart Lab is a synthetic learning tool until a real data source is intentionally added.</div><div class="section-head"><h3>Reset workspace</h3></div><button class="btn danger" id="clearAll">Delete all local workspace data</button></div></div>
+  </section>
+  <p class="footer-note">MSL Edge Flow V2.0 · Educational tool only · Not financial advice · No live data or broker execution.</p>
+</main>
+</div>
+<nav class="mobile-nav" id="mobileNav"><button class="active" data-page="home"><span>◈</span>Home</button><button data-page="academy"><span>⌘</span>Academy</button><button data-page="lab"><span>⌁</span>Chart Lab</button><button data-page="journal"><span>▤</span>Journal</button><button data-page="analytics"><span>▥</span>Stats</button></nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./app.js" defer></script>
+</body>
+</html>
